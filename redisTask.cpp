@@ -1,3 +1,5 @@
+//redisTask：写任务，向启动的redis数据库中插入一条数据。不接返回值。
+
 #include <signal.h>
 #include <iostream>
 #include <string>
