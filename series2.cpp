@@ -1,3 +1,5 @@
+//在运行过程中,动态地添加结果:根据任务1的结果,动态地决定任务2是否要执行
+
 #include <signal.h>
 #include <unistd.h>
 #include <iostream>
@@ -115,7 +117,7 @@ void redisCallback1(WFRedisTask *redisTask){
     //展示读到的结果
     if(result.is_string()){
         cout << "result is " << result.string_value() << "\n";
-        if(result.string_value() == "newvalue"){
+        if(result.string_value() == "newvalue"){  //如果任务1读到的结果是newvalue,则执行任务2。否则直接结束
             WFRedisTask* redisTask2 = WFTaskFactory::create_redis_task("redis://127.0.0.1:6379", 10, redisCallback2);
             redisTask2->get_req()->set_request("SET", {"58key", "value"});
             //series_of: 找到一个正在运行的任务所在的序列
