@@ -10,8 +10,16 @@
 
 3.redisTask <br>
 
-4.序列 series <br>
+4.mysql任务 : mysqlTask <br>
 
-5.并行任务 parallelWork <br>
+5.序列 series <br>
 
-6.workflow作为服务器 <br>
+6.并行任务 parallelWork <br>
+
+7.json <br>
+
+8.workflow作为服务端： workflow_server <br>
+
+9.wfrest <br>
+
+wfrest
