@@ -1,4 +1,4 @@
-//workflow写登录服务器
+//workflow写登录服务器:process中method若为GET，传html。若为POST添加redis任务
 //第一次GET请求，先传递html页面，然后前端填写用户名和密码，用POST进行传递
 //再根据POST报文体，解析出用户名和密码，返回登录成功还是失败
 
