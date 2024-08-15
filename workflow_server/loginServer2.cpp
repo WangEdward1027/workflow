@@ -1,4 +1,6 @@
-//泥鳅代码:workflow写登录服务器
+//workflow写登录服务器
+//第一次GET请求，先传递html页面，然后前端填写用户名和密码，用POST进行传递
+//再根据POST报文体，解析出用户名和密码，返回登录成功还是失败
 
 #include <signal.h>
 #include <iostream>
@@ -29,10 +31,10 @@ void redisCallback(WFRedisTask *redisTask){
     protocol::RedisResponse * respRedis = redisTask->get_resp();
     protocol::RedisValue result;
     respRedis->get_result(result);
-    // 找到context 提取用户传入的密码
-    SeriesContext *context = static_cast<SeriesContext*>( series_of(redisTask)->get_context());
+    //找到context 提取用户传入的密码
+    SeriesContext *context = static_cast<SeriesContext*>(series_of(redisTask)->get_context());
 
-    // result里面存储了数据库的密码
+    //result里面存储了数据库的密码
     if(result.is_string() && result.string_value() == context->password){
         // 在redisTask的回调中去修改serverTask的响应
         context->resp->append_output_body("<html>login Success</html>");
@@ -44,6 +46,7 @@ void redisCallback(WFRedisTask *redisTask){
 
 void process(WFHttpTask * serverTask){
     // serverTask是一个特殊的任务：基本工作是用户代码process，基本工作和callback是分离的
+    //http://localhost:12345/name=Edward&password=2204
     protocol::HttpRequest *req = serverTask->get_req();    //req是客户端发来的请求
     protocol::HttpResponse *resp = serverTask->get_resp(); // resp是将要回复给客户端的响应
 
