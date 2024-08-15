@@ -1,3 +1,6 @@
+//workflow写登录服务器:用url传递参数,一次性直接判断登录成功与失败
+//在process中进行解析出用户名和密码,与redis服务器进行对比
+
 #include <signal.h>
 #include <iostream> 
 #include <string>
