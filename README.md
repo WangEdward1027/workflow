@@ -20,4 +20,6 @@
 
 8.workflow作为服务端： workflow_server <br>
 
-9.wfrest <br>
+9.wfrest：在workflow框架的基础上进行简化，不需要手动写process。编译时 -lwfrest -lworkflow <br>
+
+10.阿里云OSS <br>
