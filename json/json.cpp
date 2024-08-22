@@ -37,6 +37,7 @@ void test2()
 }
 
 //nlohmann::json::parse 解析字符串
+//解析json数组
 void test3()
 {
     char str[] = "[1,2,3,{\"key\":456}]";
@@ -47,10 +48,30 @@ void test3()
     cout << "json_object[3][\"key\"] = " << json_object[3]["key"] << "\n";
 }
 
+//解析json对象
+void test4()
+{
+    string str = "{\"1\":\"h\"}";
+    cout << str << "\n";
+    nlohmann::json json_object = nlohmann::json::parse(str);
+    cout << json_object << "\n";
+    
+    //迭代器遍历
+    for(nlohmann::json::iterator it = json_object.begin(); it != json_object.end(); ++it){
+        cout << "key = " << it.key() << ", value = " << it.value() << "\n";
+    }
+    
+    //增强for循环
+    for(auto &p: json_object.items()){
+        cout << "key = " << p.key() << ", value = " << p.value() << "\n";
+    }
+}
+
 int main()
 {
-    test1();
+    /* test1(); */
     /* test2(); */
     /* test3(); */
+    test4();
     return 0;
 }
