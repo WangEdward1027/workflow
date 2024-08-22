@@ -1,16 +1,16 @@
-//json对象：object 或 array
-//dump()用来序列化为字符串， parse()用来将字符串反序列化json对象
-
 #include <iostream>
+#include <string>
 #include "nlohmann/json.hpp"
 using std::cout;
+using std::string;
 
 //json对象是obejct: []中是字符串, 整体是{  }
 void test1()
 {
-    nlohmann::json json_object;  //创建一个空的json对象
-    json_object["key"] = "value";  //json对象是一个object
-    cout << json_object.dump() << "\n";  //dump() : 序列化
+    nlohmann::json json_object;           //创建一个空的json对象
+    json_object["key"] = "value";         //json对象是一个object
+    string context = json_object.dump();  //dump() : 序列化
+    cout << context << "\n";
 }
 
 //json对象是array: []中是数字, 整体是 [  ]
@@ -49,8 +49,8 @@ void test3()
 
 int main()
 {
-    /* test1(); */
+    test1();
     /* test2(); */
-    test3();
+    /* test3(); */
     return 0;
 }
