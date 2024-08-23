@@ -4,7 +4,7 @@
 using std::cout;
 using std::string;
 
-//json对象是obejct: []中是字符串, 整体是{  }
+//json对象: 下标是字符串, 整体是{  }
 void test1()
 {
     nlohmann::json json_object;           //创建一个空的json对象
@@ -13,43 +13,36 @@ void test1()
     cout << context << "\n";
 }
 
-//json对象是array: []中是数字, 整体是 [  ]
+//json数组:下标是数字,整体是[  ]
 void test2()
 {
-    nlohmann::json json_object; 
-
-    json_object[0] = "value";
-    json_object[1] = 2204;
-    json_object.push_back(1234); //json对象是array,则支持push_back()方法 
+    //生成一个json数组,支持两种插入:下标插入、push_back插入
+    nlohmann::json json_array; 
     
-    //加入一个object {  }
-    json_object[3]["key1"] = "value1";
+    //json_array[0]是字符串
+    json_array[0] = "value";
+    //json_array[1]是数字
+    json_array[1] = 2204;
+    //json_array[2]是数字
+    json_array.push_back(1234); //json对象是array,则支持push_back()方法 
     
-    //加入一个array [  ]
+    //json_array[3]是json对象: object {  }
+    json_array[3]["key1"] = "value1";
+    
+    //json_array[4]是json数组: array [  ]
     nlohmann::json child_object;
     child_object[0] = "000";
     child_object.push_back("111");
     child_object.push_back("222");
     child_object.push_back("333");
-    json_object.push_back(child_object);
+    json_array.push_back(child_object); //json_array[4]
 
-    cout << json_object.dump() << "\n";
-}
-
-//nlohmann::json::parse 解析字符串
-//解析json数组
-void test3()
-{
-    char str[] = "[1,2,3,{\"key\":456}]";
-    nlohmann::json json_object = nlohmann::json::parse(str);    
-    cout << "json_object[0] = " << json_object[0] << "\n";
-    cout << "json_object[1] = " << json_object[1] << "\n";
-    cout << "json_object[2] = " << json_object[2] << "\n";
-    cout << "json_object[3][\"key\"] = " << json_object[3]["key"] << "\n";
+    string msg = json_array.dump();
+    cout << msg << "\n";
 }
 
 //解析json对象
-void test4()
+void test3()
 {
     string str = "{\"1\":\"h\"}";
     cout << str << "\n";
@@ -67,11 +60,22 @@ void test4()
     }
 }
 
+//解析json数组 : nlohmann::json::parse 
+void test4()
+{
+    char str[] = "[1,2,3,{\"key\":456}]";
+    nlohmann::json json_array = nlohmann::json::parse(str);    
+    cout << "json_object[0] = " << json_array[0] << "\n";
+    cout << "json_object[1] = " << json_array[1] << "\n";
+    cout << "json_object[2] = " << json_array[2] << "\n";
+    cout << "json_object[3][\"key\"] = " << json_array[3]["key"] << "\n";
+}
+
 int main()
 {
     /* test1(); */
-    /* test2(); */
+    test2();
     /* test3(); */
-    test4();
+    /* test4(); */
     return 0;
 }
